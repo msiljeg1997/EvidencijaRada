@@ -17,6 +17,17 @@ tableextension 50125 "Employee Absence TEx" extends "Employee Absence"
         field(40; "Date"; Date)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate();
+            var
+                DateForWeek: Record Date;
+            begin
+                if DateForWeek.Get(DateForWeek."Period Type"::Date, rec.Date) then
+                    WeekDay := DateForWeek."Period Name";
+            end;
+        }
+        field(50; "WeekDay"; Text[10])
+        {
+            DataClassification = ToBeClassified;
         }
     }
 
@@ -46,4 +57,7 @@ tableextension 50125 "Employee Absence TEx" extends "Employee Absence"
 
         exit(format(Hours) + ',' + format(Minutes));
     end;
+
+
+
 }

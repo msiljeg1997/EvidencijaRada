@@ -44,6 +44,14 @@ pageextension 50106 "Absence Registration Ex" extends "Absence Registration"
                 Enabled = true;
                 ToolTip = 'Duration';
             }
+            field("Weekday"; rec.WeekDay)
+            {
+                ApplicationArea = All;
+                Caption = 'Weekday';
+                Editable = false;
+                Enabled = true;
+                ToolTip = 'Weekday';
+            }
 
         }
     }
