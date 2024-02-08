@@ -23,6 +23,7 @@ tableextension 50125 "Employee Absence TEx" extends "Employee Absence"
             begin
                 if DateForWeek.Get(DateForWeek."Period Type"::Date, rec.Date) then
                     WeekDay := DateForWeek."Period Name";
+
             end;
         }
         field(50; "WeekDay"; Text[10])

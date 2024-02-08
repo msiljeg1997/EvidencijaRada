@@ -1,7 +1,30 @@
-pageextension 50106 "Absence Registration Ex" extends "Absence Registration"
+pageextension 50106 "Evidencija Rada" extends "Absence Registration"
 {
+    Caption = 'Evidencija Rada';
     layout
     {
+
+
+        modify("Cause of Absence Code")
+        {
+            ApplicationArea = All;
+            Caption = 'Type of Work';
+        }
+        modify("To Date")
+        {
+            Visible = false;
+        }
+        modify("From Date")
+        {
+            Visible = false;
+        }
+        modify("Quantity")
+        {
+            Visible = false;
+        }
+
+
+
         addafter("Employee No.")
         {
             field("Employee Full Name"; GetEmployeeFullName())
@@ -36,14 +59,7 @@ pageextension 50106 "Absence Registration Ex" extends "Absence Registration"
                 Enabled = true;
                 ToolTip = 'Finish Time';
             }
-            field("Duration"; rec.CalculateDuration())
-            {
-                ApplicationArea = All;
-                Caption = 'Duration';
-                Editable = true;
-                Enabled = true;
-                ToolTip = 'Duration';
-            }
+
             field("Weekday"; rec.WeekDay)
             {
                 ApplicationArea = All;
@@ -53,6 +69,19 @@ pageextension 50106 "Absence Registration Ex" extends "Absence Registration"
                 ToolTip = 'Weekday';
             }
 
+
+
+        }
+        addafter("Quantity")
+        {
+            field("Duration"; rec.CalculateDuration())
+            {
+                ApplicationArea = All;
+                Caption = 'Duration';
+                Editable = true;
+                Enabled = true;
+                ToolTip = 'Duration';
+            }
         }
     }
 
