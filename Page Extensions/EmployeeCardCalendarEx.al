@@ -8,24 +8,35 @@ pageextension 50125 PageCalendarEx extends "Employee Card"
             {
                 ApplicationArea = All;
                 Caption = 'Calendar';
-
-                // trigger OnValidate();
-                // var
-                //     EvdencijaRada: Record "Employee Absence";
-                //     BaseCalendarChange: Record "Base Calendar Change";
-                // begin
-                //     EvdencijaRada.FindFirst();
-                //     BaseCalendarChange.FindFirst();
-                //     CreateWorkLogs(EvdencijaRada."Employee No.", BaseCalendarChange."Base Calendar Code");
-                // end;
             }
-            // Add changes to page layout here
         }
     }
 
     actions
     {
-        // Add changes to page actions here
+        addafter("A&bsences")
+        {
+            action("Generate Calendar")
+            {
+                ApplicationArea = All;
+                Image = Calendar;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Generate Calendar';
+
+                trigger OnAction()
+                var
+                    GenerateYearlyCalendar: Codeunit 50137;
+                    EmployeeCode: Code[20];
+                    WorkingDays: List of [Date];
+                begin
+                    EmployeeCode := Rec."No.";
+                    WorkingDays := GenerateYearlyCalendar.GenerateYearlyCalendarForEmployee(EmployeeCode);
+
+                end;
+            }
+        }
     }
 
     var

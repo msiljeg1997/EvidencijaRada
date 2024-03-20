@@ -14,12 +14,10 @@ tableextension 50143 CalendarEx extends Employee
 
     keys
     {
-        // Add changes to keys here
     }
 
     fieldgroups
     {
-        // Add changes to field groups here
     }
 
     var

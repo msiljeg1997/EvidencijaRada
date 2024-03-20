@@ -6,15 +6,20 @@ tableextension 50125 "Employee Absence TEx" extends "Employee Absence"
         {
             DataClassification = ToBeClassified;
         }
-        field(20; "Start Time"; Time)
+        field(20; "Base Calendar Code"; Code[10])
+        {
+            TableRelation = "Base Calendar".Code;
+            NotBlank = true;
+        }
+        field(30; "Start Time"; Time)
         {
             DataClassification = ToBeClassified;
         }
-        field(30; "Finish Time"; Time)
+        field(40; "Finish Time"; Time)
         {
             DataClassification = ToBeClassified;
         }
-        field(40; "Date"; Date)
+        field(50; "Date"; Date)
         {
             DataClassification = ToBeClassified;
             trigger OnValidate();
@@ -26,7 +31,8 @@ tableextension 50125 "Employee Absence TEx" extends "Employee Absence"
 
             end;
         }
-        field(50; "WeekDay"; Text[10])
+        field(60
+        ; "WeekDay"; Text[10])
         {
             DataClassification = ToBeClassified;
         }

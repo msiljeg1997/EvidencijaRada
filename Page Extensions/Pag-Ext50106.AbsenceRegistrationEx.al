@@ -35,6 +35,14 @@ pageextension 50106 "Evidencija Rada" extends "Absence Registration"
                 Enabled = false;
                 ToolTip = 'Employee Full Name';
             }
+            field("Base Calendar Code"; rec."Base Calendar Code")
+            {
+                ApplicationArea = All;
+                Caption = 'Base Calendar Code';
+                Editable = true;
+                Enabled = true;
+                ToolTip = 'Base Calendar Code';
+            }
             field(Date; Rec.Date)
             {
                 ApplicationArea = All;
@@ -81,6 +89,45 @@ pageextension 50106 "Evidencija Rada" extends "Absence Registration"
                 Editable = true;
                 Enabled = true;
                 ToolTip = 'Duration';
+            }
+        }
+    }
+
+    actions
+    {
+        addafter("A&bsence")
+        {
+            action("Generate Calendar")
+            {
+                ApplicationArea = All;
+                Image = Calendar;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Generate yearly calendar for the selected employee';
+
+                trigger OnAction()
+                var
+                    GenerateYearlyCalendar: Codeunit 50137;
+                    EmployeeAbsence: Record "Employee Absence";
+                    EmployeeCode: Code[20];
+                    WorkingDays: List of [Date];
+                    WorkDate: Date;
+                begin
+                    EmployeeCode := Rec."Employee No.";
+                    WorkingDays := GenerateYearlyCalendar.GenerateYearlyCalendarForEmployee(EmployeeCode);
+
+
+                    foreach WorkDate in WorkingDays do begin
+
+                        EmployeeAbsence.Init();
+                        EmployeeAbsence."Employee No." := EmployeeCode;
+                        EmployeeAbsence.Date := WorkDate;
+                        // dodaj kasnije jos fields
+
+                        EmployeeAbsence.Insert();
+                    end;
+                end;
             }
         }
     }

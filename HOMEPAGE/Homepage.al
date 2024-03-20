@@ -50,7 +50,6 @@ page 50136 Kadrovska
                         p: Page 9027;
                         ki2ta: Codeunit kitara;
 
-
                     begin
                         EmployeeNo := 'EH';
                         Year := Date2DMY(TODAY, 3); // daj sadasnju god
@@ -59,8 +58,6 @@ page 50136 Kadrovska
                         StartTime := 080000T; // start namjesten na 8 sati ujutro
                         EndTime := 160000T; // kraj namjesten na 4 sati popodne
 
-                        // Function SetSource can't take employee as argument so we have to set it manually to companyinfo and pass that as argument
-                        // because the SetSource function takes Customer, CompanyInfo etc... but not employee
                         rCompanyInformation.INIT();
                         rCompanyInformation."Base Calendar Code" := 'PONPET';
                         rCompanyInformation.Insert();
@@ -91,24 +88,6 @@ page 50136 Kadrovska
                         end;
                     end;
                 }
-                // action("Testna Akcija Calendar")
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Testna Kalendar';
-                //     trigger OnAction();
-                //     var
-                //         Employee: Record Employee;
-                //         Calendar: Record "Base Calendar";
-                //     begin
-                //         if Rec."First Name" = 'Ester' then begin
-                //             if Calendar.Get('PONPET') then begin
-                //                 if Employee.Get(Rec."No.") then begin
-                //                     EvidencijaRada.CreateWorkLogs(Rec."No.", Calendar.Code);
-                //                 end;
-                //             end;
-                //         end;
-                //     end;
-                // }
 
             }
         }
